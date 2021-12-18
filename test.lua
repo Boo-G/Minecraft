@@ -5,9 +5,9 @@ function select_item(item_name)
 
     for i=1, 16 do
         turtle.select(i)
-        if turtle.getItemDetail() == "nil" then
-            print("this is nil")
-        elseif turtle.getItemDetail()["name"] == item_name then
+        -- if turtle.getItemDetail()["name"] == "nil" then
+        --     print("this is nil")
+        if turtle.getItemDetail()["name"] == item_name then
             print("found and selected at index", i)
             break
         -- else
