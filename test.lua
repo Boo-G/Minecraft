@@ -9,38 +9,38 @@ position_z = 0 -- up is +, down is -
 
 function forward()
     turtle.forward()
-    postion_x += 1
+    postion_x = postion_x +1
 end
 
 function back()
     turtle.back()
-    postion_x -= 1
+    postion_x = postion_x - 1
 end
 
 function up()
     turtle.up()
-    position_z += 1
+    position_z = position_z + 1
 end
 
 function down()
     turtle.down()
-    position_z -= 1
+    position_z = position_z - 1
 end
 
 function right()
     turtle.turnRight()
     turtle.forward()
-    postion_y += 1
+    postion_y = postion_y + 1
 end
 
 function left()
     turtle.turnLeft()
     turtle.forward()
-    postion_y -= 1
+    postion_y = postion_y - 1
 end
 
 
-
+ -- other stuff --
 
 function select_item(item_name)
 
@@ -58,8 +58,8 @@ function select_item(item_name)
 end
 
 function fuelcheck()
-    if turtle.getFuelLevel() < 60 or turtle.FuelLevel() == "unlimited" then
-        select_item("minecraft:coal")
+    if turtle.getFuelLevel() <= 60 or turtle.FuelLevel() == "unlimited" then
+        -- select_item("minecraft:coal") assuming get_fuel is always called before this function
         turtle.refuel(5)
 
     end
@@ -68,33 +68,59 @@ end
 function get_fuel()
     select_item("minecraft:coal")
     if turtle.getItemCount() <= 10 then
-        turtle.suckDown()
+        turtle.suckDown(55)
+    end
+end
 
-
-
-select_item("minecraft:coal")
             
  
 function timber_time()
-    if turtle.inspect() == "minecraft:Oak Log" then
+    local success, data = turtle.inspect()
+    local success1, data1 = turtle.inspectUp()
+
+
+
+    if data.name == "minecraft:log" then
         turtle.dig()
         forward()
+    else 
+        print("i dont see wood")
     end
-    while turtle.inspectUp == "minecraft:Oak Log" then
+
+
+    while (data1.name == "minecraft:log" )
+    do
         turtle.digUp()
         up()
+    
     end
-    while position_z != 0 then
+
+    while (position_z ~= 0)
+    do
         down()
     end
-    while postion_x != 0 then
+    
+    while (postion_x ~= 0)
+    do
         back()
     end
+end
+
+
+-- function empty_wood()
+--     if
 
 
 
+-- select_item("minecraft:coal") -- works
+-- get_fuel()
 -- fuelcheck()
-while 1 then
-    get_fuel()
-    fuelcheck()
-    
+timber_time()
+-- print(turtle.getItemDetail())
+
+-- while 1 do
+--     get_fuel()
+--     fuelcheck()
+--     timber_time()
+-- end
+
