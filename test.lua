@@ -59,7 +59,7 @@ function select_item(item_name)
 end
 
 function fuelcheck()
-    if turtle.getFuelLevel() <= 60 or turtle.FuelLevel() == "unlimited" then
+    if turtle.getFuelLevel() <= 60 or turtle.getFuelLevel() == "unlimited" then
         -- select_item("minecraft:coal") assuming get_fuel is always called before this function
         get_fuel()
         turtle.refuel(5)
@@ -87,11 +87,13 @@ function timber_time()
     if data.name == "minecraft:log" then
         turtle.dig()
         forward()
+        success1, data1 = turtle.inspectUp()
         -- mine up untill tree is gone, then reset positions
         while (data1.name == "minecraft:log" )
         do
             turtle.digUp()
             up()
+            success1, data1 = turtle.inspectUp()
         
         end
     
