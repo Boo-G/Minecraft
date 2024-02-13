@@ -1,11 +1,12 @@
-print("Hello World!")
-print("work pls?")
 
+-- Positions -- 
 postion_x = 0 -- north is +, south is -
 postion_y = 0 -- east is +, west is -
 position_z = 0 -- up is +, down is -
 
+
 -- Move Controlls -- 
+--  might need to fix so the turtle is always facing north to fix issues
 
 function forward()
     turtle.forward()
@@ -83,29 +84,31 @@ function timber_time()
     if data.name == "minecraft:log" then
         turtle.dig()
         forward()
+        -- mine up untill tree is gone, then reset positions
+        while (data1.name == "minecraft:log" )
+        do
+            turtle.digUp()
+            up()
+        
+        end
+    
+        while (position_z ~= 0)
+        do
+            down()
+        end
+        
+        while (postion_x ~= 0)
+        do
+            back()
+        end
     else 
         print("i dont see wood")
     end
 
 
-    while (data1.name == "minecraft:log" )
-    do
-        turtle.digUp()
-        up()
-    
-    end
-
-    while (position_z ~= 0)
-    do
-        down()
-    end
-    
-    while (postion_x ~= 0)
-    do
-        back()
-    end
 end
 
+--  TODO: make a functions called zero out. that zeros out the turtles positions
 
 -- function empty_wood()
 --     if
@@ -114,7 +117,7 @@ end
 
 -- select_item("minecraft:coal") -- works
 -- get_fuel()
--- fuelcheck()
+fuelcheck()
 timber_time()
 -- print(turtle.getItemDetail())
 
