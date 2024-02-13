@@ -61,7 +61,9 @@ end
 function fuelcheck()
     if turtle.getFuelLevel() <= 60 or turtle.FuelLevel() == "unlimited" then
         -- select_item("minecraft:coal") assuming get_fuel is always called before this function
+        get_fuel()
         turtle.refuel(5)
+
 
     end
 end
@@ -69,7 +71,7 @@ end
 function get_fuel()
     select_item("minecraft:coal")
     if turtle.getItemCount() <= 10 then
-        turtle.suckDown(55)
+        turtle.suckDown(54)
     end
 end
 
@@ -79,7 +81,8 @@ function timber_time()
     local success, data = turtle.inspect()
     local success1, data1 = turtle.inspectUp()
 
-
+    -- pre condition
+    fuelcheck()
 
     if data.name == "minecraft:log" then
         turtle.dig()
@@ -117,7 +120,6 @@ end
 
 -- select_item("minecraft:coal") -- works
 -- get_fuel()
-fuelcheck()
 timber_time()
 -- print(turtle.getItemDetail())
 
