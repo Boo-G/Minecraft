@@ -97,23 +97,52 @@ function timber_time()
         
         end
     
-        while (position_z ~= 0)
-        do
-            down()
-        end
-        
-        while (postion_x ~= 0)
-        do
-            back()
-        end
-    else 
-        print("i dont see wood")
+        returnHome()
+
+    else
+        print(data.name)
+        placeTree()
     end
 
 
 end
 
---  TODO: make a functions called zero out. that zeros out the turtles positions
+
+function returnHome()
+    while (position_z ~= 0)
+    do
+        if position_z > 0 then
+            down()
+        else
+            up()
+        end
+    end
+    
+    while (postion_x ~= 0)
+    do
+        if postion_x > 0 then
+            back()
+        else
+            forward()
+        end
+    end
+
+    while (postion_y ~= 0)
+    do
+        if postion_y > 0 then
+            left()
+        else
+            right()
+        end
+    end
+end
+
+
+function placeTree()
+    select_item("minecraft:sapling")
+    turtle.place()
+
+end
 
 -- function empty_wood()
 --     if
@@ -122,7 +151,10 @@ end
 
 -- select_item("minecraft:coal") -- works
 -- get_fuel()
-timber_time()
+while (true)
+do 
+    timber_time()
+end
 -- print(turtle.getItemDetail())
 
 -- while 1 do
